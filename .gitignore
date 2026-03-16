@@ -3,3 +3,6 @@
 
 tuto.html
 about.html
+templates/task_home.html
+
+task.py
