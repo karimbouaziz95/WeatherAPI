@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial file</title>
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a> |
+        <a href="/about/">About</a> |
+        <a href="/contact">Contact</a>
+    </nav>
+    <h1>Welcome to the tutorial</h1>
+    <p>
+        This is a simple HTML file to demonstrate how to 
+        create a basic webpage.
+    </p>
+    <img src="{{ url_for('static', filename='cat.png') }}" 
+    style="width: 500px; height: auto;">
+    <br>
+    <a href="https://google.com">Visit Google</a>
+</body>
+</html>
