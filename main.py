@@ -15,8 +15,16 @@ def home():
     )
 
 
-@app.route("/api/v1/<station>/<date>")
-def about(station, date):
+@app.route("/api/v1/<station>")
+def station_all_data(station):
+    filename = f"data_small/TG_STAID{str(station).zfill(6)}.txt"
+    df = pd.read_csv(filename, skiprows=20, parse_dates=["    DATE"])
+    result = df.to_dict(orient="records")
+    return result
+
+
+@app.route("/api/v1/<station>/day/<date>")
+def station_data_at_date(station, date):
     filename = f"data_small/TG_STAID{str(station).zfill(6)}.txt"
     df = pd.read_csv(filename, skiprows=20, parse_dates=["    DATE"])
     df["TG"] = df['   TG'].mask(df['   TG'] == -9999, np.nan)
@@ -28,6 +36,13 @@ def about(station, date):
         "temperature": temperature
     }
 
+
+@app.route("/api/v1/<station>/year/<year>")
+def station_data_at_year(station, year):
+    filename = f"data_small/TG_STAID{str(station).zfill(6)}.txt"
+    df = pd.read_csv(filename, skiprows=20, parse_dates=["    DATE"])
+    result = df[df["    DATE"].dt.year == int(year)].to_dict(orient="records")
+    return result
 
 if __name__ == "__main__":
     app.run(debug=True)
